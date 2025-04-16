@@ -20,8 +20,7 @@ jobs:
 
       - name: Convert YAML to JSON
         run: |
-          ls -la
-          fq -r . proyects.yml > proyects.json
+          fq -r . projects.yml > projects.json
 
       - name: Update or create latest release
         id: release
@@ -29,8 +28,8 @@ jobs:
         with:
           name: Latest
           tag_name: latest
-          files: proyects.json
-          body: "Auto-generated JSON from proyects.yml"
+          files: projects.json
+          body: "Auto-generated JSON from projects.yml"
           draft: false
           prerelease: false
         env:
