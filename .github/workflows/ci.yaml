@@ -14,8 +14,9 @@ jobs:
 
       - name: Install fq
         run: |
-          curl -fsSL https://github.com/wader/fq/releases/latest/download/fq_linux_amd64 -o /usr/local/bin/fq
-          chmod +x /usr/local/bin/fq
+          curl -OLs https://github.com/wader/fq/releases/download/v0.14.0/fq_0.14.0_linux_amd64.tar.gz
+          tar -xzf fq*.tar.gz
+          sudo install -Dm755 fq /usr/local/bin/fq
 
       - name: Convert YAML to JSON
         run: |
