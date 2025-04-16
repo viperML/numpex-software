@@ -20,7 +20,7 @@ jobs:
 
       - name: Convert YAML to JSON
         run: |
-          fq -o json . proyects.yml > proyects.json
+          fq -r . proyects.yml > proyects.json
 
       - name: Update or create latest release
         id: release
