@@ -1,6 +1,6 @@
 with open("projects.yml", "a") as f:
 
-    for i in range(1, 100):
+    for i in range(1, 1000):
         entry = f"""
 - name: Fake{i}
   description: |
