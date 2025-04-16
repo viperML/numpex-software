@@ -1,0 +1,35 @@
+name: ci
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install fq
+        run: |
+          curl -fsSL https://github.com/wader/fq/releases/latest/download/fq_linux_amd64 -o /usr/local/bin/fq
+          chmod +x /usr/local/bin/fq
+
+      - name: Convert YAML to JSON
+        run: |
+          fq -o json . proyects.yml > proyects.json
+
+      - name: Update or create latest release
+        id: release
+        uses: softprops/action-gh-release@v1
+        with:
+          name: Latest
+          tag_name: latest
+          files: proyects.json
+          body: "Auto-generated JSON from proyects.yml"
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
