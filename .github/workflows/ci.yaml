@@ -1,5 +1,7 @@
 name: ci
 
+concurrency: ci
+
 on:
   push:
     branches:
@@ -8,6 +10,8 @@ on:
 jobs:
   main:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
