@@ -22,15 +22,13 @@ jobs:
         run: |
           fq -r . projects.yml > projects.json
 
-      - name: Update or create latest release
-        id: release
-        uses: softprops/action-gh-release@v1
+      - uses: ncipollo/release-action@v1
+        name: Release
         with:
-          name: Latest
-          tag_name: latest
-          files: projects.json
-          body: "Auto-generated JSON from projects.yml"
-          draft: false
-          prerelease: false
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          tag: latest
+          makeLatest: true
+          omitBody: true
+          omitName: true
+          allowUpdates: true
+          replacesArtifacts: true
+          artifacts: projects.json
